@@ -14,6 +14,8 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
+import cn.java.base.ch11.listener.MyWindowsListener;
+
 public class PingBall {
 	private final int DESK_WIDTH = 300;
 	private final int DESK_HEIGHT = 400;
@@ -21,23 +23,23 @@ public class PingBall {
 	private final int RACKET_WIDTH = 60;
 	private final int RACKET_HEIGHT = 20;
 	
-	private final int BALL_SIZE = 16;
+	private final int BALL_SIZE = 15;
 	
-	private Frame f = new Frame("µØ«Ú”Œœ∑");
+	private Frame f = new Frame("ºÚ“◊µØ«Ú”Œœ∑");
 	private Random rand = new Random();
 	
 	private int ySpeed = 10;
 	private Double xySpeed = rand.nextDouble() - 0.5;
 	private int xSpeed = (int)(ySpeed * xySpeed * 2);
 
-	private int ballX = rand.nextInt(200) + 20;
-	private int ballY = rand.nextInt(10) + 20;
-	
-	private int racketX = rand.nextInt(200);
+	private int racketX = rand.nextInt(24)*10;
 	private final int RACKET_Y = 340;
 	
-	private MyCanvas deskArea = new MyCanvas();
+	private int ballX = racketX + (RACKET_WIDTH - BALL_SIZE)/2;
+	private int ballY = RACKET_Y - BALL_SIZE;
+	
 	Timer timer;
+	private MyCanvas deskArea = new MyCanvas();
 	private boolean isLose = false;
 
 	private void init() {
@@ -61,12 +63,12 @@ public class PingBall {
 				if(ballX < 0 || ballX > DESK_WIDTH - BALL_SIZE) {
 					xSpeed = -xSpeed;
 				}
-				if(ballY >= RACKET_Y - BALL_SIZE && (ballX < racketX || ballX > racketX + BALL_SIZE)) {
+				if(ballY > RACKET_Y - BALL_SIZE && (ballX < racketX - BALL_SIZE/2 || ballX > racketX + RACKET_WIDTH - BALL_SIZE/2)) {
 					timer.stop();
 					isLose = true;
 					deskArea.repaint();
 				}
-				else if(ballY < 0 || (ballY >= RACKET_Y - BALL_SIZE && ballX > racketX && ballX < racketX + BALL_SIZE)) {
+				else if(ballY < 0 || (ballY >= RACKET_Y - BALL_SIZE && ballX >= (racketX - BALL_SIZE/2) && ballX <= (racketX + RACKET_WIDTH - BALL_SIZE/2))) {
 					ySpeed = -ySpeed;
 				}
 				
@@ -75,6 +77,7 @@ public class PingBall {
 				deskArea.repaint();
 			}
 		};
+		f.addWindowListener(new MyWindowsListener());
 
 		deskArea.setPreferredSize(new Dimension(DESK_WIDTH, DESK_HEIGHT));
 		f.add(deskArea);
@@ -83,7 +86,7 @@ public class PingBall {
 		f.pack();
 		f.setVisible(true);
 		
-		timer = new Timer(100, taskPerformer);
+		timer = new Timer(10, taskPerformer);
 		timer.start();
 	}
 	
