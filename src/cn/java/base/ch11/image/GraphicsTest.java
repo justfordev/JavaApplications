@@ -12,31 +12,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-import cn.java.base.ch11.image.SimpleDraw.MyCanvas;
 import cn.java.base.ch11.listener.MyWindowsListener;
 
 public class GraphicsTest {
-	private final String LINE_SHARP = "LINE";
-	private final String STRING_SHARP = "STRING";
-	private final String RECT_3D_SHARP = "RECT_3D";
-	private final String RECT_3D_SOLID_SHARP = "RECT_3D_SOLID";
-	private final String RECT_3D_RAISED_SHARP = "RECT_3D_RAISED";
-	private final String RECT_3D_SOLID_RAISED_SHARP = "RECT_3D_SOLID_RAISED";
-	private final String RECT_SHARP = "RECT";
-	private final String RECT_SOLID_SHARP = "RECT_SOLID";
-	private final String ROUND_RECT_SHARP = "ROUND_RECT";
-	private final String ROUND_RECT_SOLID_SHARP = "ROUND_RECT_SOLID";
-	private final String OVAL_SHARP = "OVAL";
-	private final String OVAL_SOLID_SHARP = "OVAL_SOLID";
-	private final String ARC_SHARP = "ARC";
-	private final String ARC_SOLID_SHARP = "ARC_SOLID";
-	private final String POLGON_SHARP = "POLGON";
-	private final String POLGON_SOLID_SHARP = "POLGON_SOLID";
+	private final int LINE_SHARP = 1;
+	private final int STRING_SHARP = 2;
+	private final int RECT_3D_SHARP = 3;
+	private final int RECT_3D_SOLID_SHARP = 4;
+	private final int RECT_3D_RAISED_SHARP = 5;
+	private final int RECT_3D_SOLID_RAISED_SHARP = 6;
+	private final int RECT_SHARP = 7;
+	private final int RECT_SOLID_SHARP = 8;
+	private final int ROUND_RECT_SHARP = 9;
+	private final int ROUND_RECT_SOLID_SHARP = 10;
+	private final int OVAL_SHARP = 11;
+	private final int OVAL_SOLID_SHARP = 12;
+	private final int ARC_SHARP = 13;
+	private final int ARC_SOLID_SHARP = 14;
+	private final int POLGON_SHARP = 15;
+	private final int POLGON_SOLID_SHARP = 16;
 
 	private Frame f = new Frame("Graphics工具");
 	private Panel p = new Panel();
 	private MyCanvas drawarea = new MyCanvas();
-	private String sharp = "";
+	private int sharp = 0;
 	
 	private Button line = new Button("绘制直线");
 	private Button string = new Button("绘制字符串");
@@ -175,8 +174,8 @@ public class GraphicsTest {
 		p.add(rect);
 		p.add(rect_solid);
 		p.add(rect_3d);
-		p.add(rect_3d_raised);
 		p.add(rect_3d_solid);
+		p.add(rect_3d_raised);
 		p.add(rect_3d_solid_raised);
 		p.add(round_rect);
 		p.add(round_rect_solid);
@@ -203,74 +202,162 @@ public class GraphicsTest {
 	class MyCanvas extends Canvas {
 		Random rd = new Random();
 		public void paint(Graphics g) {
-			if(sharp.equals(LINE_SHARP)) {
+			switch (sharp) {
+			case 1:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.drawLine(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
-			}
-			if(sharp.equals(STRING_SHARP)) {
+
+			case 2:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.drawString("STRING", rd.nextInt(400), rd.nextInt(300));
-			}
-			if(sharp.equals(RECT_3D_SHARP)) {
-				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
-				g.draw3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), false);
-			}
-			if(sharp.equals(RECT_3D_RAISED_SHARP)) {
+				break;
+
+			case 3:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.draw3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), true);				
-			}
-			if(sharp.equals(RECT_3D_SOLID_SHARP)) {
+				break;
+			
+			case 4:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.fill3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), false);
-			}
-			if(sharp.equals(RECT_3D_SOLID_RAISED_SHARP)) {
+				break;
+				
+			case 5:
+				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+				g.draw3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), true);				
+				break;
+				
+			case 6:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.fill3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), true);				
-			}
-			if(sharp.equals(RECT_SHARP)) {
+				break;
+				
+			case 7:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.drawRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
-			}
-			if(sharp.equals(RECT_SOLID_SHARP)) {
+				break;
+				
+			case 8:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.fillRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
-			}
-			if(sharp.equals(ROUND_RECT_SHARP)) {
-				int w = rd.nextInt(400);
-				int h = rd.nextInt(300);
+				break;
+				
+			case 9:
+				int w1 = rd.nextInt(400);
+				int h1 = rd.nextInt(300);
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
-				g.drawRoundRect(rd.nextInt(100), rd.nextInt(100), w, h, rd.nextInt(w), rd.nextInt(h));
-			}
-			if(sharp.equals(ROUND_RECT_SOLID_SHARP)) {
-				int w = rd.nextInt(400);
-				int h = rd.nextInt(300);
+				g.drawRoundRect(rd.nextInt(100), rd.nextInt(100), w1, h1, rd.nextInt(w1), rd.nextInt(h1));
+				break;
+				
+			case 10:
+			{
+				int w2 = rd.nextInt(400);
+				int h2 = rd.nextInt(300);
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
-				g.fillRoundRect(rd.nextInt(100), rd.nextInt(100), w, h, rd.nextInt(w), rd.nextInt(h));
-			}
-			if(sharp.equals(OVAL_SHARP)) {
+				g.fillRoundRect(rd.nextInt(100), rd.nextInt(100), w2, h2, rd.nextInt(w2), rd.nextInt(h2));
+				break;
+			}	
+			case 11:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.drawOval(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
-			}
-			if(sharp.equals(OVAL_SOLID_SHARP)) {
+				break;
+				
+			case 12:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.fillOval(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
-			}
-			if(sharp.equals(ARC_SHARP)) {
+				break;
+				
+			case 13:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.drawArc(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), rd.nextInt(100), rd.nextInt(100));
-			}
-			if(sharp.equals(ARC_SOLID_SHARP)) {
+				break;
+				
+			case 14:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.fillArc(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), rd.nextInt(100), rd.nextInt(100));
-			}
-			if(sharp.equals(POLGON_SHARP)) {
+				break;
+				
+			case 15:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.drawPolygon(new int[]{rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400)}, new int[]{rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300)}, 7);
-			}
-			if(sharp.equals(POLGON_SOLID_SHARP)) {
+				break;
+				
+			case 16:
 				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
 				g.fillPolygon(new int[]{rd.nextInt(400), rd.nextInt(400), rd.nextInt(400)}, new int[]{rd.nextInt(300), rd.nextInt(300), rd.nextInt(300)}, 3);
+				break;
+				
+			default:
+				break;
 			}
+//			if(sharp.equals(LINE_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawLine(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
+//			}
+//			if(sharp.equals(STRING_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawString("STRING", rd.nextInt(400), rd.nextInt(300));
+//			}
+//			if(sharp.equals(RECT_3D_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.draw3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), false);
+//			}
+//			if(sharp.equals(RECT_3D_RAISED_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.draw3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), true);				
+//			}
+//			if(sharp.equals(RECT_3D_SOLID_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fill3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), false);
+//			}
+//			if(sharp.equals(RECT_3D_SOLID_RAISED_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fill3DRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), true);				
+//			}
+//			if(sharp.equals(RECT_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
+//			}
+//			if(sharp.equals(RECT_SOLID_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fillRect(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
+//			}
+//			if(sharp.equals(ROUND_RECT_SHARP)) {
+//				int w = rd.nextInt(400);
+//				int h = rd.nextInt(300);
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawRoundRect(rd.nextInt(100), rd.nextInt(100), w, h, rd.nextInt(w), rd.nextInt(h));
+//			}
+//			if(sharp.equals(ROUND_RECT_SOLID_SHARP)) {
+//				int w = rd.nextInt(400);
+//				int h = rd.nextInt(300);
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fillRoundRect(rd.nextInt(100), rd.nextInt(100), w, h, rd.nextInt(w), rd.nextInt(h));
+//			}
+//			if(sharp.equals(OVAL_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawOval(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
+//			}
+//			if(sharp.equals(OVAL_SOLID_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fillOval(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300));
+//			}
+//			if(sharp.equals(ARC_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawArc(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), rd.nextInt(100), rd.nextInt(100));
+//			}
+//			if(sharp.equals(ARC_SOLID_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fillArc(rd.nextInt(100), rd.nextInt(100), rd.nextInt(400), rd.nextInt(300), rd.nextInt(100), rd.nextInt(100));
+//			}
+//			if(sharp.equals(POLGON_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.drawPolygon(new int[]{rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400), rd.nextInt(400)}, new int[]{rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300), rd.nextInt(300)}, 7);
+//			}
+//			if(sharp.equals(POLGON_SOLID_SHARP)) {
+//				g.setColor(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+//				g.fillPolygon(new int[]{rd.nextInt(400), rd.nextInt(400), rd.nextInt(400)}, new int[]{rd.nextInt(300), rd.nextInt(300), rd.nextInt(300)}, 3);
+//			}
 		}
 	}
 }
