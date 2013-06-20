@@ -53,10 +53,10 @@ public class FileRename {
 
 				System.out.println("oldfile: " + oldFile);
 				System.out.println("newfile: " + newFile);
-//				boolean result = new File(oldFile).renameTo(new File(newFile));
-//				if(!result) {
-//					System.out.println("--> renaming the file [" + oldFile + "] is failed");
-//				}
+				boolean result = new File(oldFile).renameTo(new File(newFile));
+				if(!result) {
+					System.out.println("--> renaming the file [" + oldFile + "] is failed");
+				}
 				i++;
 			}
 		} else {
@@ -66,10 +66,10 @@ public class FileRename {
 				
 				System.out.println("oldfile: " + oldFile);
 				System.out.println("newfile: " + newFile);
-//				boolean result = new File(oldFile).renameTo(new File(newFile));
-//				if(!result) {
-//					System.out.println("--> renaming the file [" + oldFile + "] is failed");
-//				}
+				boolean result = new File(oldFile).renameTo(new File(newFile));
+				if(!result) {
+					System.out.println("--> renaming the file [" + oldFile + "] is failed");
+				}
 				i++;
 			}
 		}
