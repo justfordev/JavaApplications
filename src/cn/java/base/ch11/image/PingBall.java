@@ -86,7 +86,7 @@ public class PingBall {
 		f.pack();
 		f.setVisible(true);
 		
-		timer = new Timer(10, taskPerformer);
+		timer = new Timer(100, taskPerformer);
 		timer.start();
 	}
 	
